@@ -79,7 +79,7 @@ class _ForecastPageState extends State<ForecastPage> with TickerProviderStateMix
 
   void _handleStateChange(int activeIndex) {
     /// If choosing the same tab, there's nothing to animate.
-    if (activeIndex == activeTabIndex) return;
+    // if (activeIndex == activeTabIndex) return;
 
     /// The next animation state represents the _end_ values
     /// for the next animation that fires. (It will also become the
@@ -192,6 +192,8 @@ class _ForecastPageState extends State<ForecastPage> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+    _buildAnimationController();
+
     final _currentTemp = Humanize.currentTemperature(
       widget.settings.selectedTemperature,
       _forecastController.selectedHourlyTemperature,
@@ -214,12 +216,12 @@ class _ForecastPageState extends State<ForecastPage> with TickerProviderStateMix
         children: <Widget>[
           ColorTransitionText(
             text: _weatherDescription,
-            style: Theme.of(context).textTheme.headline,
+            style: Theme.of(context).textTheme.headline5,
             animation: _textColorTween.animate(_animationController),
           ),
           ColorTransitionText(
             text: _currentTemp,
-            style: Theme.of(context).textTheme.display3,
+            style: Theme.of(context).textTheme.headline2,
             animation: _textColorTween.animate(_animationController),
           ),
         ],
@@ -240,7 +242,7 @@ class _ForecastPageState extends State<ForecastPage> with TickerProviderStateMix
           animation: _backgroundColorTween.animate(_animationController),
           title: ColorTransitionText(
             text: _forecastController.selectedHourlyTemperature.city.name,
-            style: Theme.of(context).textTheme.headline,
+            style: Theme.of(context).textTheme.headline5,
             animation: _textColorTween.animate(_animationController),
           ),
           actionIcon: widget.settingsButton,
